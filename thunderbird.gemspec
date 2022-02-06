@@ -4,7 +4,7 @@ require_relative "lib/thunderbird/version"
 
 Gem::Specification.new do |spec|
   spec.name = "thunderbird"
-  spec.version = Thunderbird::VERSION
+  spec.version = Thunderbird::Version::VERSION
   spec.authors = ["Joe Yates"]
   spec.email = ["joe.g.yates@gmail.com"]
 

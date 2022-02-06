@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
-module Thunderbird
-  VERSION = "0.1.0"
+class Thunderbird
+  module Version
+    MAJOR    = 0
+    MINOR    = 1
+    REVISION = 1
+    PRE      = nil
+    VERSION  = [MAJOR, MINOR, REVISION, PRE].compact.map(&:to_s).join(".")
+  end
 end
