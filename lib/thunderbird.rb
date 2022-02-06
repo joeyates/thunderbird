@@ -1,6 +1,9 @@
 require "os"
+require_relative "thunderbird/version"
 
 class Thunderbird
+  VERSION = Version::VERSION
+
   def data_path
     case
     when OS.linux?
