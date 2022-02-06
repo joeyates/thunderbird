@@ -1,16 +1,21 @@
+# frozen_string_literal: true
+
 require "thunderbird/profiles"
 
-class Thunderbird::Install
-  attr_reader :title
-  attr_reader :entries
+class Thunderbird
+  # Represents an installation of Thunderbird
+  class Install
+    attr_reader :title
+    attr_reader :entries
 
-  # entries are lines from profile.ini
-  def initialize(title, entries)
-    @title = title
-    @entries = entries
-  end
+    # entries are lines from profile.ini
+    def initialize(title, entries)
+      @title = title
+      @entries = entries
+    end
 
-  def default
-    Thunderbird::Profiles.new.profile_for_path(entries[:Default])
+    def default
+      Thunderbird::Profiles.new.profile_for_path(entries[:Default])
+    end
   end
 end

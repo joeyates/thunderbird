@@ -1,65 +1,69 @@
+# frozen_string_literal: true
+
 require "thunderbird/profile"
 require "thunderbird/subdirectory"
 
-# A local folder is a file containing emails
-class Thunderbird::LocalFolder
-  attr_reader :path
-  attr_reader :profile
+class Thunderbird
+  # A local folder is a file containing emails
+  class LocalFolder
+    attr_reader :path
+    attr_reader :profile
 
-  def initialize(profile, path)
-    @profile = profile
-    @path = path
-  end
-
-  def set_up
-    return if path_elements.empty?
-
-    return true if !in_subdirectory?
-
-    subdirectory.set_up
-  end
-
-  def full_path
-    if in_subdirectory?
-      File.join(subdirectory.full_path, folder_name)
-    else
-      folder_name
+    def initialize(profile, path)
+      @profile = profile
+      @path = path
     end
-  end
 
-  def exists?
-    File.exist?(full_path)
-  end
+    def set_up
+      return if path_elements.empty?
 
-  def msf_path
-    "#{path}.msf"
-  end
+      return true if !in_subdirectory?
 
-  def msf_exists?
-    File.exist?(msf_path)
-  end
+      subdirectory.set_up
+    end
 
-  private
+    def full_path
+      if in_subdirectory?
+        File.join(subdirectory.full_path, folder_name)
+      else
+        folder_name
+      end
+    end
 
-  def in_subdirectory?
-    path_elements.count > 1
-  end
+    def exists?
+      File.exist?(full_path)
+    end
 
-  def subdirectory
-    return nil if !in_subdirectory?
+    def msf_path
+      "#{path}.msf"
+    end
 
-    Thunderbird::Subdirectory.new(profile, subdirectory_path)
-  end
+    def msf_exists?
+      File.exist?(msf_path)
+    end
 
-  def path_elements
-    path.split(File::SEPARATOR)
-  end
+    private
 
-  def subdirectory_path
-    File.join(path_elements[0..-2])
-  end
+    def in_subdirectory?
+      path_elements.count > 1
+    end
 
-  def folder_name
-    path_elements[-1]
+    def subdirectory
+      return nil if !in_subdirectory?
+
+      Thunderbird::Subdirectory.new(profile, subdirectory_path)
+    end
+
+    def path_elements
+      path.split(File::SEPARATOR)
+    end
+
+    def subdirectory_path
+      File.join(path_elements[0..-2])
+    end
+
+    def folder_name
+      path_elements[-1]
+    end
   end
 end

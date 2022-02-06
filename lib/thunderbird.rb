@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require "os"
 require_relative "thunderbird/version"
 
+# Root information
 class Thunderbird
   VERSION = Version::VERSION
 
