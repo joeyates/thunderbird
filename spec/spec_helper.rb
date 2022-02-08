@@ -8,12 +8,7 @@ end
 
 require "thunderbird"
 
-RSpec.configure do |config|
-  config.example_status_persistence_file_path = ".rspec_status"
-
-  config.disable_monkey_patching!
-
-  config.expect_with :rspec do |c|
-    c.syntax = :expect
-  end
+Dir.chdir(__dir__) do
+  glob = File.join("support", "**", "*.rb")
+  Dir[glob].sort.each { |f| require_relative f }
 end
