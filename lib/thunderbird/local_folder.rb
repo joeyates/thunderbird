@@ -15,7 +15,7 @@ class Thunderbird
     end
 
     def set_up
-      return if path_elements.empty?
+      return false if path_elements.empty?
 
       return true if !in_subdirectory?
 
@@ -26,7 +26,7 @@ class Thunderbird
       if in_subdirectory?
         File.join(subdirectory.full_path, folder_name)
       else
-        folder_name
+        path
       end
     end
 
@@ -35,7 +35,7 @@ class Thunderbird
     end
 
     def msf_path
-      "#{path}.msf"
+      "#{full_path}.msf"
     end
 
     def msf_exists?
@@ -51,7 +51,7 @@ class Thunderbird
     def subdirectory
       return nil if !in_subdirectory?
 
-      Thunderbird::Subdirectory.new(profile, subdirectory_path)
+      Subdirectory.new(profile, subdirectory_path)
     end
 
     def path_elements

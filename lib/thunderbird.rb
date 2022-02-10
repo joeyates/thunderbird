@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 require "os"
-require_relative "thunderbird/version"
+
+# Require all files so they get counted in coverage
+Dir.chdir(__dir__) do
+  glob = File.join("**", "*.rb")
+  Dir[glob].sort.each { |f| require_relative f }
+end
 
 # Root information
 class Thunderbird
