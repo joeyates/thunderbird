@@ -12,8 +12,17 @@ end
 
 Aruba.configure do |config|
   config.home_directory = File.expand_path("./tmp/home")
+  config.allow_absolute_paths = true
 end
 
 RSpec.configure do |config|
   config.include ThunderbirdProfileHelpers, type: :aruba
+
+  config.before(:suite) do
+    FileUtils.rm_rf "./tmp/home"
+  end
+
+  config.after do
+    FileUtils.rm_rf "./tmp/home"
+  end
 end
