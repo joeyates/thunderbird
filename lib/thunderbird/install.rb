@@ -15,7 +15,7 @@ class Thunderbird
     end
 
     def default
-      Thunderbird::Profiles.new.profile_for_path(entries[:Default])
+      Profiles.new.profile_for_path(entries[:Default])
     end
   end
 end
