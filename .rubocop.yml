@@ -12,11 +12,19 @@ Gemspec/DateAssignment:
 Gemspec/RequireMFA:
   Enabled: true
 
+Layout/DotPosition:
+  Enabled: true
+  EnforcedStyle: trailing
+
 Layout/LineEndStringConcatenationIndentation:
   Enabled: true
 
 Layout/SpaceBeforeBrackets:
   Enabled: true
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: true
+  EnforcedStyle: no_space
 
 Lint/AmbiguousAssignment:
   Enabled: true
@@ -179,3 +187,7 @@ Style/SwapValues:
 
 Layout/LineLength:
   Max: 120
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"

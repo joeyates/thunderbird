@@ -7,26 +7,26 @@ RSpec.describe Thunderbird do
 
   describe ".data_path" do
     [
-      ["Linux",   true,  false, false, "$HOME + .thunderbird", File.expand_path("~/.thunderbird")],
-      ["macOS",   false, true,  false, "$HOME + Library/Thunderbird", File.expand_path("~/Library/Thunderbird")],
-      ["Windows", false, false, true,  "%APPDATA% + Thunderbird", "APPDATA_PATH/Thunderbird"]
-    ].each do |os, is_linux, is_macos, is_windows, description, expected|
-      context "when on Linux" do
+      ["Linux",   "$HOME + .thunderbird", File.expand_path("~/.thunderbird")],
+      ["macOS",   "$HOME + Library/Thunderbird", File.expand_path("~/Library/Thunderbird")],
+      ["Windows", "%APPDATA% + Thunderbird", "APPDATA_PATH/Thunderbird"]
+    ].each do |os, description, expected|
+      context "when on #{os}" do
         before do
-          allow(OS).to receive(:linux?) { is_linux }
-          allow(OS).to receive(:mac?) { is_macos }
-          allow(OS).to receive(:windows?) { is_windows }
+          allow(OS).to receive(:linux?) { os == "Linux" }
+          allow(OS).to receive(:mac?) { os == "macOS" }
+          allow(OS).to receive(:windows?) { os == "Windows" }
         end
 
         around do |example|
-          if is_windows
+          if os == "Windows"
             @previous = ENV["APPDATA"]
             ENV["APPDATA"] = "APPDATA_PATH"
           end
+
           example.run
-          if is_windows
-            ENV["APPDATA"] = @previous
-          end
+
+          ENV["APPDATA"] = @previous if os == "Windows"
         end
 
         it "is #{description}" do
