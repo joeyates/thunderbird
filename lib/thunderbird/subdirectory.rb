@@ -10,7 +10,7 @@ class Thunderbird
     attr_reader :path
     attr_reader :profile
 
-    def initialize(profile, path)
+    def initialize(profile:, path:)
       @profile = profile
       @path = path
     end
@@ -51,7 +51,7 @@ class Thunderbird
     def parent
       return nil if !sub_sub_directory?
 
-      self.class.new(profile, File.join(path_elements[0..-2]))
+      self.class.new(profile: profile, path: File.join(path_elements[0..-2]))
     end
 
     # placeholder relative path is 'Foo.sbd/Bar.sbd/Baz'
@@ -59,7 +59,7 @@ class Thunderbird
       @placeholder = begin
         relative_path = File.join(subdirectories[0..-2], path_elements[-1])
         path = File.join(profile.local_folders_path, relative_path)
-        Thunderbird::SubdirectoryPlaceholder.new(path)
+        Thunderbird::SubdirectoryPlaceholder.new(path: path)
       end
     end
 

@@ -9,7 +9,7 @@ class Thunderbird
     attr_reader :entries
 
     # entries are lines from profile.ini
-    def initialize(title, entries)
+    def initialize(title:, entries:)
       @title = title
       @entries = entries
     end

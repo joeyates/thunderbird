@@ -9,7 +9,7 @@ class Thunderbird
     attr_reader :path
     attr_reader :profile
 
-    def initialize(profile, path)
+    def initialize(profile:, path:)
       @profile = profile
       @path = path
     end
@@ -51,7 +51,7 @@ class Thunderbird
     def subdirectory
       return nil if !in_subdirectory?
 
-      Subdirectory.new(profile, subdirectory_path)
+      Subdirectory.new(profile: profile, path: subdirectory_path)
     end
 
     def path_elements
