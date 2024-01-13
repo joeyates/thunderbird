@@ -61,12 +61,13 @@ class Thunderbird
         let(:subdirectory_path) { "parent/child" }
         let(:sbd_path) { "parent.sbd/child.sbd" }
         let(:placeholder_path) { "parent.sbd/child" }
-        let(:parent) { instance_double(Subdirectory, set_up: parent_result) }
+        let(:parent) { instance_double(described_class, set_up: parent_result) }
         let(:parent_result) { true }
 
         before do
           allow(described_class).to receive(:new).and_call_original
-          allow(described_class).to receive(:new).with(root: local_folders_path, path: "parent") { parent }
+          allow(described_class).to receive(:new).
+            with(root: local_folders_path, path: "parent") { parent }
         end
 
         it "sets up its parent" do

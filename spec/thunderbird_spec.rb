@@ -2,7 +2,7 @@
 
 RSpec.describe Thunderbird do
   it "has a version number" do
-    expect(Thunderbird::VERSION).not_to be nil
+    expect(Thunderbird::VERSION).not_to be_nil
   end
 
   describe ".data_path" do
@@ -20,13 +20,13 @@ RSpec.describe Thunderbird do
 
         around do |example|
           if os == "Windows"
-            @previous = ENV["APPDATA"]
+            reset = ENV.fetch("APPDATA") if ENV.key?("APPDATA")
             ENV["APPDATA"] = "APPDATA_PATH"
           end
 
           example.run
 
-          ENV["APPDATA"] = @previous if os == "Windows"
+          ENV["APPDATA"] = reset if reset
         end
 
         it "is #{description}" do
