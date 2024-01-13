@@ -4,6 +4,7 @@ require "thunderbird/subdirectory"
 
 class Thunderbird
   # A local folder is a file containing emails
+  # It is not a "live" folder that is sync-able with an online account
   class LocalFolder
     attr_reader :path
     attr_reader :profile
