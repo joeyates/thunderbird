@@ -18,7 +18,7 @@ class Thunderbird
     let(:msf_path) { "#{full_folder_path}.msf" }
 
     before do
-      allow(Subdirectory).to receive(:new) { subdirectory }
+      allow(Subdirectory).to receive(:new).with(root: anything, path: anything) { subdirectory }
     end
 
     describe ".set_up" do
