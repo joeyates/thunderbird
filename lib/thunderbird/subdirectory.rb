@@ -8,10 +8,10 @@ class Thunderbird
     # `path` is the UI path, it doesn't have the '.sbd' extensions
     # that are present in the real, file system path
     attr_reader :path
-    attr_reader :profile
+    attr_reader :root
 
-    def initialize(profile:, path:)
-      @profile = profile
+    def initialize(root:, path:)
+      @root = root
       @path = path
     end
 
@@ -35,7 +35,7 @@ class Thunderbird
     # subdirectory relative path is 'Foo.sbd/Bar.sbd/Baz.sbd'
     def full_path
       relative_path = File.join(subdirectories)
-      File.join(profile.local_folders_path, relative_path)
+      File.join(root, relative_path)
     end
 
     private
@@ -51,14 +51,14 @@ class Thunderbird
     def parent
       return nil if !sub_sub_directory?
 
-      self.class.new(profile: profile, path: File.join(path_elements[0..-2]))
+      self.class.new(root: root, path: File.join(path_elements[0..-2]))
     end
 
     # placeholder relative path is 'Foo.sbd/Bar.sbd/Baz'
     def placeholder
       @placeholder = begin
         relative_path = File.join(subdirectories[0..-2], path_elements[-1])
-        path = File.join(profile.local_folders_path, relative_path)
+        path = File.join(root, relative_path)
         Thunderbird::SubdirectoryPlaceholder.new(path: path)
       end
     end

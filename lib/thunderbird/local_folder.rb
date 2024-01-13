@@ -51,7 +51,7 @@ class Thunderbird
     def subdirectory
       return nil if !in_subdirectory?
 
-      Subdirectory.new(profile: profile, path: subdirectory_path)
+      Subdirectory.new(path: subdirectory_path, root: profile.local_folders_path)
     end
 
     def path_elements

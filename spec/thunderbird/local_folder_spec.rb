@@ -4,7 +4,7 @@ class Thunderbird
   RSpec.describe LocalFolder, type: :aruba do
     subject { described_class.new(profile: profile, path: path) }
 
-    let(:profile) { "profile" }
+    let(:profile) { instance_double(Profile, local_folders_path: "path") }
     let(:path) { "subdirectory/folder" }
     let(:subdirectory) do
       instance_double(

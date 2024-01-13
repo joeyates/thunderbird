@@ -2,7 +2,7 @@
 
 class Thunderbird
   RSpec.describe Subdirectory, type: :aruba do
-    subject { described_class.new(profile: profile, path: subdirectory_path) }
+    subject { described_class.new(root: local_folders_path, path: subdirectory_path) }
 
     let(:subdirectory_path) { "subdirectory_path" }
     let(:sbd_path) { "subdirectory_path.sbd" }
@@ -66,7 +66,7 @@ class Thunderbird
 
         before do
           allow(described_class).to receive(:new).and_call_original
-          allow(described_class).to receive(:new).with(profile: profile, path: "parent") { parent }
+          allow(described_class).to receive(:new).with(root: local_folders_path, path: "parent") { parent }
         end
 
         it "sets up its parent" do
