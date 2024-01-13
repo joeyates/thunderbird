@@ -2,7 +2,7 @@
 
 class Thunderbird
   RSpec.describe Profile do
-    subject { described_class.new("title", entries) }
+    subject { described_class.new(title: "title", entries: entries) }
 
     let(:entries) { {Path: path, IsRelative: is_relative} }
     let(:path) { "foo" }

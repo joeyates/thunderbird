@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require "thunderbird/profile"
 require "thunderbird/subdirectory"
 
 class Thunderbird
   # A local folder is a file containing emails
+  # It is not a "live" folder that is sync-able with an online account
   class LocalFolder
     attr_reader :path
     attr_reader :profile
 
-    def initialize(profile, path)
+    def initialize(profile:, path:)
       @profile = profile
       @path = path
     end
@@ -51,7 +51,7 @@ class Thunderbird
     def subdirectory
       return nil if !in_subdirectory?
 
-      Subdirectory.new(profile, subdirectory_path)
+      Subdirectory.new(path: subdirectory_path, root: profile.local_folders_path)
     end
 
     def path_elements

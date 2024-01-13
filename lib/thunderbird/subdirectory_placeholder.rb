@@ -6,7 +6,7 @@ class Thunderbird
   class SubdirectoryPlaceholder
     attr_reader :path
 
-    def initialize(path)
+    def initialize(path:)
       @path = path
     end
 

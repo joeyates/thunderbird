@@ -10,19 +10,19 @@ class Thunderbird
     def profile_for_path(path)
       title, entries = blocks.find { |_name, entries| entries[:Path] == path }
 
-      Thunderbird::Profile.new(title, entries) if title
+      Thunderbird::Profile.new(title: title, entries: entries) if title
     end
 
     def profile(name)
       title, entries = blocks.find { |_name, entries| entries[:Name] == name }
 
-      Thunderbird::Profile.new(title, entries) if title
+      Thunderbird::Profile.new(title: title, entries: entries) if title
     end
 
     def installs
       @installs ||= begin
         pairs = blocks.filter { |name, _entries| name.start_with?("Install") }
-        pairs.map { |title, entries| Thunderbird::Install.new(title, entries) }
+        pairs.map { |title, entries| Thunderbird::Install.new(title: title, entries: entries) }
       end
     end
 

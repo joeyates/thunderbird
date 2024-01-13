@@ -2,13 +2,13 @@
 
 class Thunderbird
   RSpec.describe Install do
-    subject { described_class.new("title", entries) }
+    subject { described_class.new(title: "title", entries: entries) }
 
     let(:entries) { {Default: "path"} }
     let(:profiles) { instance_double(Profiles) }
 
     before do
-      allow(Thunderbird::Profiles).to receive(:new) { profiles }
+      allow(Thunderbird::Profiles).to receive(:new).with(no_args) { profiles }
       allow(profiles).to receive(:profile_for_path).with("path") { "profile" }
     end
 

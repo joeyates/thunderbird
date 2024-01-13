@@ -18,7 +18,7 @@ class Thunderbird
         Default=Foo
       PROFILE
 
-      allow(Profile).to receive(:new).with("Profile1", anything) { profile }
+      allow(Profile).to receive(:new).with(title: "Profile1", entries: anything) { profile }
     end
 
     describe ".profile_for_path" do
@@ -62,7 +62,7 @@ class Thunderbird
 
       before do
         allow(Thunderbird::Install).
-          to receive(:new).with(install_title, anything) { install }
+          to receive(:new).with(title: install_title, entries: anything) { install }
       end
 
       it "returns all Installs" do
