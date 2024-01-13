@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "thunderbird/profile"
 require "thunderbird/subdirectory"
 
 class Thunderbird
