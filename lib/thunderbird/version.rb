@@ -4,7 +4,7 @@ class Thunderbird
   module Version
     MAJOR    = 0
     MINOR    = 4
-    REVISION = 0
+    REVISION = 1
     PRE      = nil
     VERSION  = [MAJOR, MINOR, REVISION, PRE].compact.map(&:to_s).join(".")
   end
