@@ -25,5 +25,6 @@ Gem::Specification.new do |spec|
   spec.executables = []
   spec.require_paths = ["lib"]
 
+  spec.add_runtime_dependency "mork-parser", "~> 0.1.1"
   spec.add_runtime_dependency "os"
 end
