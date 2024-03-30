@@ -11,10 +11,10 @@ class Thunderbird
     end
 
     def each(&block)
-      content = File.read(path)
+      content = File.read(index_path)
       data = parser.data(content)
       messages = data.tables[MESSAGE_NAMESPACE]["1"]
-      File.open(index_path) do |file|
+      File.open(path) do |file|
         messages.each do |id, message_info|
           message_size = message_info["offlineMsgSize"]
           length = message_size.to_i(16)

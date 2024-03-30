@@ -3,8 +3,8 @@ class Thunderbird
   RSpec.describe Mbox, type: :aruba do
     subject { described_class.new(path: mailbox_path) }
 
-    let(:mailbox_path) { "some/path/mbox" }
     let(:index_path) { "some/path/mbox.msf" }
+    let(:mailbox_path) { "some/path/mbox" }
     let(:mailbox_exists) { true }
     let(:index_exists) { true }
     let(:mork) { instance_double(Mork::Parser, data: data) }
@@ -25,21 +25,21 @@ class Thunderbird
     let(:message_second) { "From - Thu Jan 02 00:00:00 1970\n" }
 
     before do
-      allow(File).to receive(:read).and_call_original
-      allow(File).to receive(:read).with(mailbox_path) do
+      allow(File).to receive(:open).and_call_original
+      allow(File).to receive(:open).with(mailbox_path) do |&block|
         if !mailbox_exists
           raise Errno::ENOENT, "No such file or directory @ rb_sysopen - #{mailbox_path}"
         end
 
-        "mailbox_content"
+        block.call(file)
       end
-      allow(File).to receive(:open).and_call_original
-      allow(File).to receive(:open).with(index_path) do |&block|
+      allow(File).to receive(:read).and_call_original
+      allow(File).to receive(:read).with(index_path) do
         if !index_exists
           raise Errno::ENOENT, "No such file or directory @ rb_sysopen - #{index_path}"
         end
 
-        block.call(file)
+        "index_content"
       end
       allow(Mork::Parser).to receive(:new) { mork }
       allow(file).to receive(:read).with(message_first.length) { message_first }
