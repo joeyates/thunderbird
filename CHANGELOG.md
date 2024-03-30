@@ -7,3 +7,9 @@
 ### Added
 
 * Implemented mailbox message enumeration
+
+## [0.5.0] - 2024-03-30
+
+### Changed
+
+* Fix mailbox iteration using the 'mork-parser' gem
