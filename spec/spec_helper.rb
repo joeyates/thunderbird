@@ -11,6 +11,6 @@ require "thunderbird"
 $LOAD_PATH << __dir__
 support_files = Dir.chdir(__dir__) do
   glob = File.join("support", "**", "*.rb")
-  Dir[glob].sort
+  Dir[glob]
 end
 support_files.each { |f| require f }

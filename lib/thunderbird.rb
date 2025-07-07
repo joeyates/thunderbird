@@ -5,7 +5,7 @@ require "os"
 # Require all files so they get counted in coverage
 Dir.chdir(__dir__) do
   glob = File.join("**", "*.rb")
-  Dir[glob].sort.each { |f| require_relative f }
+  Dir[glob].each { |f| require_relative f }
 end
 
 # Root information

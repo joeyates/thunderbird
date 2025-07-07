@@ -23,7 +23,7 @@ class Thunderbird
         return false if !parent_ok
       end
 
-      ok = check
+      ok = check_creatable
       return false if !ok
 
       FileUtils.mkdir_p full_path
@@ -79,7 +79,7 @@ class Thunderbird
       path_elements.map { |p| "#{p}.sbd" }
     end
 
-    def check
+    def check_creatable
       case
       when exists? && !placeholder.exists?
         Kernel.puts(

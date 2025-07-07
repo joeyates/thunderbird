@@ -29,7 +29,10 @@ class Thunderbird
     private
 
     FOLDER_NAMESPACE = "ns:msg:db:row:scope:dbfolderinfo:all"
+    private_constant :FOLDER_NAMESPACE
+
     MESSAGE_NAMESPACE = "ns:msg:db:row:scope:msgs:all"
+    private_constant :MESSAGE_NAMESPACE
 
     def index_path
       "#{path}.msf"

@@ -1,11 +1,11 @@
 inherit_from: .rubocop_todo.yml
 
-require:
+plugins:
 - rubocop-rake
 - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.0
   Exclude:
     - "bin/stubs/*"
     - "vendor/**/*"
@@ -156,6 +156,8 @@ Metrics/ModuleLength:
 
 Naming/BlockForwarding:
   Enabled: true
+Naming/PredicateMethod:
+  Enabled: false
 
 RSpec/BeEmpty:
   Enabled: true
@@ -179,8 +181,6 @@ RSpec/EmptyMetadata:
 RSpec/ExcessiveDocstringSpacing:
   Enabled: true
 RSpec/Eq:
-  Enabled: true
-RSpec/FilePath:
   Enabled: true
 RSpec/IdenticalEqualityAssertion:
   Enabled: true
@@ -411,4 +411,3 @@ Style/SwapValues:
   Enabled: true
 Style/YAMLFileRead:
   Enabled: true
-
