@@ -10,9 +10,11 @@ class Thunderbird
       @path = path
     end
 
+    def uid_validity
+      data.tables[FOLDER_NAMESPACE]["1"]["1"]["UIDValidity"]
+    end
+
     def each(&block)
-      content = File.read(index_path)
-      data = parser.data(content)
       messages = data.tables[MESSAGE_NAMESPACE]["1"]
       File.open(path) do |file|
         messages.each do |id, message_info|
@@ -26,14 +28,19 @@ class Thunderbird
 
     private
 
+    FOLDER_NAMESPACE = "ns:msg:db:row:scope:dbfolderinfo:all"
     MESSAGE_NAMESPACE = "ns:msg:db:row:scope:msgs:all"
-
-    def parser
-      @parser ||= Mork::Parser.new
-    end
 
     def index_path
       "#{path}.msf"
+    end
+
+    def data
+      @data ||= begin
+        parser = Mork::Parser.new
+        content = File.read(index_path)
+        parser.data(content)
+      end
     end
   end
 end

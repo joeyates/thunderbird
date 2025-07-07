@@ -72,6 +72,22 @@ class Thunderbird
         end
       end
     end
+
+    describe "#uid_validity" do
+      let(:tables) do
+        {
+          "ns:msg:db:row:scope:dbfolderinfo:all" => {
+            "1" => {
+              "1" => {"UIDValidity" => "12345"}
+            }
+          }
+        }
+      end
+
+      it "returns the UID validity" do
+        expect(subject.uid_validity).to eq("12345")
+      end
+    end
   end
 end
 # rubocop:enable Lint/EmptyBlock
